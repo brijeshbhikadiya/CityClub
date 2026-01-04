@@ -1,0 +1,29 @@
+import { getWidth } from './utils/Dimensions';
+
+export const fontSize = {
+  size6: getWidth(6),
+  size7: getWidth(7),
+  size9: getWidth(9),
+  size10: getWidth(10),
+  size11: getWidth(11),
+  size12: getWidth(12),
+  size13: getWidth(13),
+  size14: getWidth(14),
+  size15: getWidth(15),
+  size16: getWidth(16),
+  size17: getWidth(17),
+  size18: getWidth(18),
+  size19: getWidth(19),
+  size20: getWidth(20),
+  size22: getWidth(22),
+  size23: getWidth(23),
+
+  size24: getWidth(24),
+  size25: getWidth(25),
+  size26: getWidth(26),
+  size28: getWidth(28),
+  size30: getWidth(30),
+  size36: getWidth(36),
+  size54: getWidth(54),
+  size40: getWidth(40),
+};

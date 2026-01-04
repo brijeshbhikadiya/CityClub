@@ -1,45 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { LogBox, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import MainNavigation from './src/navigators/stackNavigator';
+import { ScreenNames } from './src/constants/AppConstants';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './src/localization/i18n/i18n.config';
+import FlashMessage from 'react-native-flash-message';
+import { setFlashMessageRef } from './src/constants/GConstant';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Colors } from './src/constants/Colors';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+LogBox.ignoreAllLogs();
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
+  const [initialRouteName, setInitialRouteName] = useState<string | null>(
+    ScreenNames.LOGINCONTAINER,
+  );
+
+  
+
+  const flashMessageRef = useRef(null);
+  setFlashMessageRef(flashMessageRef);
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <KeyboardProvider statusBarTranslucent>
+        <I18nextProvider i18n={i18n}>
+          <View style={{ flex: 1, backgroundColor: Colors.whiteF2 }}>
+              <MainNavigation initialRouteName={initialRouteName} />
+          </View>
+          <FlashMessage ref={flashMessageRef} position="top" floating={true} />
+        </I18nextProvider>
+      </KeyboardProvider>
     </SafeAreaProvider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;
+
+
